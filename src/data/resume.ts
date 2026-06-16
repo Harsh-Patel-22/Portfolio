@@ -55,10 +55,10 @@ export const resumeData: ResumeData = {
   role: "Backend & Systems Engineer",
   headline: "B.Tech Computer Science student building high-performance APIs, database schemas, and scalable data pipelines.",
   summary: "Motivated and detail-oriented Software Engineer specializing in backend development, seeking to contribute to scalable, production-grade systems. Proficient in ASP.NET Core, C#, Entity Framework Core, PostgreSQL, SQL Server, and MongoDB, with hands-on experience designing RESTful APIs, implementing JWT-based authentication, and managing relational and non-relational databases. Committed to daily discipline and a continuous growth mindset, practicing algorithmic problem solving on LeetCode to improve 1% better each day.",
-  email: "harshpatel22.dev@gmail.com",
+  email: "hp22022005@gmail.com",
   github: "https://github.com/Harsh-Patel-22",
-  linkedin: "https://linkedin.com/in/harsh-patel-22", // Clean placeholder link matching github structure
-  leetcode: "https://leetcode.com/u/Harsh-Patel-22", // Professional placeholder matching standard username
+  linkedin: "https://linkedin.com/in/harsh-patel-31ab6b2a2/",
+  leetcode: "https://leetcode.com/u/Harsh-Patel-22",
   skills: [
     {
       category: "Programming Languages",
