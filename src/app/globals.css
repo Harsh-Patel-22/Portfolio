@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050508;
+  --foreground: #f3f4f6;
+  --card: #0c0c12;
+  --card-border: #1f1f2e;
+  --primary: #6366f1;
+  --primary-glow: rgba(99, 102, 241, 0.15);
+  --secondary: #a855f7;
+  --secondary-glow: rgba(168, 85, 247, 0.15);
+  --accent: #14b8a6;
+  --accent-glow: rgba(20, 184, 166, 0.15);
+  --text-muted: #9ca3af;
+  --border: #1e1e2f;
+  --glow-color: rgba(99, 102, 241, 0.5);
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --animate-cursor-blink: cursor-blink 1s step-end infinite;
+  --animate-grid-fade: grid-fade 8s ease-in-out infinite alternate;
+  --animate-radial-pulse: radial-pulse 4s ease-in-out infinite alternate;
+
+  @keyframes cursor-blink {
+    from, to { background-color: transparent }
+    50% { background-color: currentColor }
+  }
+  @keyframes grid-fade {
+    from { opacity: 0.15 }
+    to { opacity: 0.3 }
+  }
+  @keyframes radial-pulse {
+    from { transform: scale(0.9); opacity: 0.4 }
+    to { transform: scale(1.1); opacity: 0.6 }
+  }
+}
+
+/* Base resets & styles */
+html, body {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e2f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2e2e4f;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(12, 12, 18, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(16, 16, 24, 0.85);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 1px 1px 0 rgba(99, 102, 241, 0.1) inset;
+}
+
+/* Tech Dot Grid Background */
+.tech-grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    radial-gradient(circle, rgba(99, 102, 241, 0.07) 1px, transparent 1px);
+}
+
+.gradient-text-primary {
+  background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-secondary {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #7e22ce 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-accent {
+  background: linear-gradient(135deg, #99f6e4 0%, #14b8a6 50%, #0f766e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.neon-glow-primary {
+  box-shadow: 0 0 40px 0 var(--primary-glow);
+}
+
+.neon-glow-secondary {
+  box-shadow: 0 0 40px 0 var(--secondary-glow);
+}
