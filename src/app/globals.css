@@ -35,21 +35,43 @@
   --animate-radial-pulse: radial-pulse 4s ease-in-out infinite alternate;
 
   @keyframes cursor-blink {
-    from, to { background-color: transparent }
-    50% { background-color: currentColor }
+
+    from,
+    to {
+      background-color: transparent
+    }
+
+    50% {
+      background-color: currentColor
+    }
   }
+
   @keyframes grid-fade {
-    from { opacity: 0.15 }
-    to { opacity: 0.3 }
+    from {
+      opacity: 0.15
+    }
+
+    to {
+      opacity: 0.3
+    }
   }
+
   @keyframes radial-pulse {
-    from { transform: scale(0.9); opacity: 0.4 }
-    to { transform: scale(1.1); opacity: 0.6 }
+    from {
+      transform: scale(0.9);
+      opacity: 0.4
+    }
+
+    to {
+      transform: scale(1.1);
+      opacity: 0.6
+    }
   }
 }
 
 /* Base resets & styles */
-html, body {
+html,
+body {
   scroll-behavior: smooth;
   background-color: var(--background);
   color: var(--foreground);
@@ -58,13 +80,16 @@ html, body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--background);
 }
+
 ::-webkit-scrollbar-thumb {
   background: #1e1e2f;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #2e2e4f;
 }
@@ -80,6 +105,7 @@ html, body {
 .glass-panel-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .glass-panel-hover:hover {
   background: rgba(16, 16, 24, 0.85);
   border-color: rgba(99, 102, 241, 0.3);
@@ -89,7 +115,7 @@ html, body {
 /* Tech Dot Grid Background */
 .tech-grid-bg {
   background-size: 40px 40px;
-  background-image: 
+  background-image:
     radial-gradient(circle, rgba(99, 102, 241, 0.07) 1px, transparent 1px);
 }
 

@@ -7,6 +7,9 @@ import ProjectSection from "@/components/ProjectSection";
 import Timeline from "@/components/Timeline";
 import Achievements from "@/components/Achievements";
 import ContactForm from "@/components/ContactForm";
+import SpotlightCard from "@/components/SpotlightCard";
+import CommandMenu from "@/components/CommandMenu";
+import TelemetryTicker from "@/components/TelemetryTicker";
 import { Mail, FileDown, ArrowRight, Code2, Database, Sparkles } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
 import { resumeData } from "@/data/resume";
@@ -137,7 +140,7 @@ export default function Home() {
             {/* Bento Grid */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
               {/* Box 1: Core Bio */}
-              <div className="md:col-span-8 glass-panel rounded-xl p-6 flex flex-col justify-between border border-border/80">
+              <SpotlightCard className="md:col-span-8 p-6 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-semibold">
                     <Code2 className="w-4 h-4" />
@@ -154,10 +157,10 @@ export default function Home() {
                   <span>Stack priority: C# / ASP.NET / PostgreSQL</span>
                   <span>Location: Navrachana University</span>
                 </div>
-              </div>
+              </SpotlightCard>
 
               {/* Box 2: Academics Mini Card */}
-              <div className="md:col-span-4 glass-panel rounded-xl p-6 flex flex-col justify-between border border-border/80">
+              <SpotlightCard className="md:col-span-4 p-6 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-purple-400 font-mono text-xs font-semibold">
                     <Database className="w-4 h-4" />
@@ -179,10 +182,10 @@ export default function Home() {
                 <div className="mt-4 border-t border-border/40 pt-4 text-[10px] text-purple-300 font-mono">
                   Navrachana Univ (2023 - 2027)
                 </div>
-              </div>
+              </SpotlightCard>
 
               {/* Box 3: Career Aspiration */}
-              <div className="md:col-span-5 glass-panel rounded-xl p-6 flex flex-col justify-between border border-border/80">
+              <SpotlightCard className="md:col-span-5 p-6 flex flex-col justify-between">
                 <div className="space-y-4">
                   <h4 className="text-xs font-mono font-bold tracking-wider text-gray-500 uppercase">
                     Core Engineering Vision
@@ -195,10 +198,10 @@ export default function Home() {
                   <span className="w-2 h-2 rounded-full bg-indigo-500" />
                   <span className="text-[10px] font-mono text-gray-500">Pipeline Target: Microservices</span>
                 </div>
-              </div>
+              </SpotlightCard>
 
               {/* Box 4: Interests / Hobbies */}
-              <div className="md:col-span-7 glass-panel rounded-xl p-6 flex flex-col justify-between border border-border/80">
+              <SpotlightCard className="md:col-span-7 p-6 flex flex-col justify-between">
                 <div className="space-y-4">
                   <h4 className="text-xs font-mono font-bold tracking-wider text-gray-500 uppercase">
                     Discipline & Growth Mindset
@@ -221,7 +224,7 @@ export default function Home() {
                   <span>Status: Daily Progress</span>
                   <span>Commitment: 1% Better Daily</span>
                 </div>
-              </div>
+              </SpotlightCard>
             </div>
           </div>
         </section>
@@ -243,6 +246,8 @@ export default function Home() {
       </main>
 
       <Footer />
+      <CommandMenu />
+      <TelemetryTicker />
     </>
   );
 }

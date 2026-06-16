@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { Terminal as TerminalIcon, ShieldCheck, Cpu, Code2, Database } from "lucide-react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import { Terminal as TerminalIcon, ShieldCheck, Cpu, Code2, Database, Volume2, VolumeX } from "lucide-react";
 import { resumeData } from "@/data/resume";
+import { audio } from "@/lib/audio";
 
 interface HistoryItem {
   command: string;
@@ -106,7 +107,9 @@ export default function Terminal() {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
   const [theme, setTheme] = useState<ThemeName>("default");
-  
+  const [soundEnabled, setSoundEnabled] = useState(() => typeof window !== "undefined" && audio ? audio.isEnabled() : false);
+  const [mounted, setMounted] = useState(false);
+
   // Boot sequence states
   const [isBooting, setIsBooting] = useState(true);
   const [showOverlay, setShowOverlay] = useState(true);
@@ -117,28 +120,69 @@ export default function Terminal() {
   const inputRef = useRef<HTMLInputElement>(null);
   const styles = themeStyles[theme];
 
-  const welcomeMessage = (
+  const welcomeMessage = useMemo(() => (
     <div className={`space-y-2 font-mono text-xs md:text-sm ${styles.prompt}`}>
       <p className="flex items-center gap-2 font-bold">
         <ShieldCheck className="w-4 h-4 animate-pulse" />
-        System Core Online. Welcome to Harsh Patel's Interactive Shell.
+        System Core Online. Welcome to {"Harsh Patel's"} Interactive Shell.
       </p>
       <p className={styles.textMuted}>
         Type <span className="font-bold underline">`help`</span> to see available commands, or <span className="font-bold underline">`theme`</span> to customize styles.
       </p>
     </div>
-  );
+  ), [styles]);
+
+  // Keep a reference to the latest executeCommand function
+  const executeCommandRef = useRef<(cmd: string) => void>(() => { });
+  useEffect(() => {
+    executeCommandRef.current = executeCommand;
+  });
+
+  // Sync mechanical click sound status and custom terminal events
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+
+    const handleSoundToggle = (e: Event) => {
+      const customEvent = e as CustomEvent<boolean>;
+      setSoundEnabled(customEvent.detail);
+    };
+
+    const handleThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<ThemeName>;
+      if (themeStyles[customEvent.detail]) {
+        setTheme(customEvent.detail);
+      }
+    };
+
+    const handleTriggerCommand = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      executeCommandRef.current(customEvent.detail);
+    };
+
+    window.addEventListener("terminal-sound-toggle", handleSoundToggle);
+    window.addEventListener("terminal-theme-change", handleThemeChange);
+    window.addEventListener("terminal-trigger-command", handleTriggerCommand);
+
+    return () => {
+      window.removeEventListener("terminal-sound-toggle", handleSoundToggle);
+      window.removeEventListener("terminal-theme-change", handleThemeChange);
+      window.removeEventListener("terminal-trigger-command", handleTriggerCommand);
+    };
+  }, []);
 
   // Initialize the welcome message history immediately on mount
   useEffect(() => {
-    setHistory([
-      {
-        command: "system-init",
-        output: welcomeMessage,
-        timestamp: new Date().toLocaleTimeString(),
-      },
-    ]);
-  }, [theme]);
+    setTimeout(() => {
+      setHistory([
+        {
+          command: "system-init",
+          output: welcomeMessage,
+          timestamp: new Date().toLocaleTimeString(),
+        },
+      ]);
+    }, 0);
+  }, [theme, welcomeMessage]);
 
   // Play boot logs sequence
   useEffect(() => {
@@ -194,7 +238,7 @@ export default function Terminal() {
     }
   };
 
-  const executeCommand = (cmd: string) => {
+  function executeCommand(cmd: string) {
     const trimmed = cmd.trim().toLowerCase();
     const parts = trimmed.split(" ");
     const primaryCmd = parts[0];
@@ -251,7 +295,7 @@ export default function Terminal() {
       case "about":
         response = (
           <div className={`space-y-2 text-xs md:text-sm font-mono ${styles.textMuted}`}>
-            <p className={`${styles.prompt} font-bold text-sm`}>{resumeData.name} // {resumeData.role}</p>
+            <p className={`${styles.prompt} font-bold text-sm`}>{resumeData.name} {"//"} {resumeData.role}</p>
             <p className="leading-relaxed">{resumeData.summary}</p>
             <p className={`${styles.success} text-xs mt-1`}>
               💡 Technical Focus: Scalable APIs, Relational Schema Indexing, Backend Security, and 1% Better Daily Growth Mindset.
@@ -393,7 +437,7 @@ export default function Terminal() {
         } else {
           response = (
             <span className={styles.error}>
-              Error: Skin "{argument}" not found. Available: default, matrix, dracula, light.
+              Error: Skin &quot;{argument}&quot; not found. Available: default, matrix, dracula, light.
             </span>
           );
         }
@@ -403,7 +447,7 @@ export default function Terminal() {
         const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
         response = (
           <p className={`italic font-mono text-xs md:text-sm ${styles.success}`}>
-            💬 "{randomQuote}"
+            💬 &quot;{randomQuote}&quot;
           </p>
         );
         break;
@@ -411,7 +455,7 @@ export default function Terminal() {
       case "ascii":
         response = (
           <pre className={`text-[10px] leading-tight font-mono font-bold ${styles.prompt} overflow-x-auto`}>
-{` _  _   _   ___  ___ _  _ 
+            {` _  _   _   ___  ___ _  _ 
 | || | /_\\ | _ \\/ __| || |
 | __ |/ _ \\|   /\\__ \\ __ |
 |_||_/_/ \\_\\_|_\\|___/_||_|`}
@@ -460,7 +504,7 @@ export default function Terminal() {
       default:
         response = (
           <span className={`${styles.error} font-mono text-xs md:text-sm`}>
-            Command not recognized: "{trimmed}". Type <span className={`${styles.prompt} font-bold`}>`help`</span> for instructions.
+            Command not recognized: &quot;{trimmed}&quot;. Type <span className={`${styles.prompt} font-bold`}>`help`</span> for instructions.
           </span>
         );
     }
@@ -473,9 +517,20 @@ export default function Terminal() {
         timestamp: new Date().toLocaleTimeString(),
       },
     ]);
-  };
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Play tactile mechanical audio click feedback
+    if (audio && soundEnabled) {
+      if (e.key === "Enter" || e.key === "Backspace") {
+        audio.playKey(e.key);
+      } else if (e.key === " ") {
+        audio.playKey(" ");
+      } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        audio.playKey(e.key);
+      }
+    }
+
     if (e.key === "Enter") {
       executeCommand(input);
       setInput("");
@@ -504,9 +559,8 @@ export default function Terminal() {
       {/* Booting screen overlay (dedicated viewport container) */}
       {showOverlay && (
         <div
-          className={`fixed inset-0 z-50 bg-[#050508] p-6 md:p-16 flex flex-col justify-start overflow-y-auto w-screen h-screen transition-all duration-400 ease-in-out ${
-            fadeOut ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
-          }`}
+          className={`fixed inset-0 z-50 bg-[#050508] p-6 md:p-16 flex flex-col justify-start overflow-y-auto w-screen h-screen transition-all duration-400 ease-in-out ${fadeOut ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
+            }`}
         >
           <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col justify-start overflow-y-auto mt-6 font-mono text-white">
             <div className="flex items-center justify-between pb-4 mb-6 border-b border-border/30 select-none">
@@ -530,9 +584,8 @@ export default function Terminal() {
                   </div>
                 );
               })}
-              <span className={`inline-block w-2.5 h-4 animate-cursor-blink ml-1 ${
-                theme === "matrix" ? "bg-[#00ff00]" : theme === "dracula" ? "bg-[#ff79c6]" : "bg-indigo-400"
-              }`} />
+              <span className={`inline-block w-2.5 h-4 animate-cursor-blink ml-1 ${theme === "matrix" ? "bg-[#00ff00]" : theme === "dracula" ? "bg-[#ff79c6]" : "bg-indigo-400"
+                }`} />
             </div>
           </div>
         </div>
@@ -550,9 +603,24 @@ export default function Terminal() {
             <span className="w-3 h-3 rounded-full bg-amber-500/80" />
             <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
           </div>
-          <div className="flex items-center gap-1.5 text-xs">
+          <div className="flex items-center gap-2 text-xs">
             <TerminalIcon className="w-3.5 h-3.5 text-indigo-400/80" />
             <span>harsh@dev-box: ~</span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                audio?.toggleSound();
+              }}
+              className="p-1 rounded hover:bg-white/10 text-gray-500 hover:text-white transition-colors cursor-pointer ml-1.5"
+              title={mounted && soundEnabled ? "Disable tactile sounds" : "Enable tactile sounds"}
+              aria-label="Toggle terminal keystroke sounds"
+            >
+              {mounted && soundEnabled ? (
+                <Volume2 className="w-3.5 h-3.5 text-indigo-400" />
+              ) : (
+                <VolumeX className="w-3.5 h-3.5" />
+              )}
+            </button>
           </div>
           <div className="w-12" /> {/* Spacer */}
         </div>
