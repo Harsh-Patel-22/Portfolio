@@ -63,38 +63,38 @@ export const resumeData: ResumeData = {
     {
       category: "Programming Languages",
       items: [
-        { name: "C#", proficiency: 95 },
-        { name: "Python", proficiency: 85 },
-        { name: "SQL", proficiency: 80 },
-        { name: "TypeScript", proficiency: 70 },
+        { name: "C#", proficiency: 90 },
+        { name: "Python", proficiency: 80 },
+        { name: "SQL", proficiency: 75 },
+        { name: "TypeScript", proficiency: 60 },
       ]
     },
     {
       category: "Backend Architecture",
       items: [
-        { name: "ASP.NET Core Web API", proficiency: 95 },
+        { name: "ASP.NET Core Web API", proficiency: 90 },
         { name: "ASP.NET MVC", proficiency: 85 },
-        { name: "Entity Framework Core", proficiency: 90 },
-        { name: "LINQ", proficiency: 80 },
-        { name: "Flask", proficiency: 80 },
-        { name: "FastAPI", proficiency: 70 }
+        { name: "Entity Framework Core", proficiency: 85 },
+        { name: "LINQ", proficiency: 75 },
+        { name: "Flask", proficiency: 70 },
+        { name: "FastAPI", proficiency: 60 }
       ]
     },
     {
       category: "Databases & Caching",
       items: [
-        { name: "PostgreSQL", proficiency: 88 },
-        { name: "SQL Server (SSMS)", proficiency: 90 },
-        { name: "MongoDB", proficiency: 80 },
-        { name: "Redis", proficiency: 70 }
+        { name: "PostgreSQL", proficiency: 80 },
+        { name: "SQL Server (SSMS)", proficiency: 85 },
+        { name: "MongoDB", proficiency: 70 },
+        { name: "Redis", proficiency: 60 }
       ]
     },
     {
       category: "Big Data & Engineering",
       items: [
-        { name: "Apache Spark", proficiency: 75 },
+        { name: "Apache Spark", proficiency: 70 },
         { name: "Apache Hadoop", proficiency: 70 },
-        { name: "RESTful API Design", proficiency: 92 },
+        { name: "RESTful API Design", proficiency: 90 },
         { name: "JWT Authentication", proficiency: 80 }
       ]
     },
@@ -104,7 +104,7 @@ export const resumeData: ResumeData = {
         { name: "Docker", proficiency: 80 },
         { name: "GCP (Google Cloud)", proficiency: 75 },
         { name: "Vercel", proficiency: 90 },
-        { name: "Git & GitHub", proficiency: 80 },
+        { name: "Git & GitHub", proficiency: 75 },
       ]
     }
   ],
@@ -136,7 +136,6 @@ export const resumeData: ResumeData = {
       skills: ["Python", "Excel", "Data Science", "Academic Management"],
       highlights: [
         "Assisting course faculty in conducting and managing the academic curriculum for the Data Science specialization.",
-        "Leading lab sessions demonstrating scientific data libraries including Pandas, NumPy, and Scikit-Learn to peers.",
         "Structuring and grading practical assignments, ensuring high student comprehension and concept retention."
       ]
     }
@@ -155,27 +154,25 @@ export const resumeData: ResumeData = {
         "Data Warehousing & Data Mining"
       ],
       achievements: [
-        "Maintained top 5% batch ranking with a cumulative GPA of 9.24/10.",
-        "Active member of the University Technical and Hackathon committee.",
-        "Conducted multiple student workshops introducing Git, GitHub and backend API conventions."
+        "Learn, Build and Grow at Next Level Speed"
       ]
     }
   ],
   achievements: [
     {
       title: "Active LeetCode Algorithmic Problem Solver",
-      description: "Solved over 300+ medium/hard algorithmic challenges on LeetCode focusing on dynamic programming, graph algorithms, and system design layouts.",
+      description: "Solved over 120+ algorithmic challenges on LeetCode focusing on learning and optimising the approach each time.",
       date: "Ongoing"
     },
     {
       title: "GCP Cloud Infrastructure Deployment",
       description: "Architected and deployed production-ready services onto GCP Compute Engines utilizing modern containerization and secure VPC setups.",
-      date: "Jan 2026"
+      date: "June 2026"
     },
     {
-      title: "Top Performer in CSE Academic Cohort",
-      description: "Recognized by University faculty for outstanding performance in core computer science subjects, including Algorithms and Databases.",
-      date: "Dec 2025"
+      title: "Dewang Mehta IT Awards 2025",
+      description: "Got the opportunity to attend the Memorial Lecture and meet like-minded people. Awarded with 'Top Ranker' certificate.",
+      date: "August 2025"
     }
   ]
 };

@@ -113,7 +113,13 @@ export default function ContactForm() {
                 <div>
                   <p className="text-gray-500">LINKEDIN</p>
                   <a href={resumeData.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white hover:underline transition-all">
-                    linkedin.com/in/harsh-patel-22
+                    linkedin.com/in/harsh-patel-31ab6b2a2/
+                  </a>
+                </div>
+                <div>
+                  <p className="text-gray-500">LEETCODE</p>
+                  <a href={resumeData.leetcode} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white hover:underline transition-all">
+                    leetcode.com/u/Harsh-Patel-22/
                   </a>
                 </div>
               </div>
